@@ -677,76 +677,170 @@ section {
     padding: 6rem 0;
 }
 
-.objectives-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin-top: 3rem;
+.gt4-project {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.objective-card {
-    background: white;
-    padding: 3rem 2rem;
-    border: 3px solid transparent;
+.gt4-header {
     text-align: center;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
+    padding: 3rem;
+    background: white;
+    border: 3px solid var(--primary-color);
+    margin-bottom: 3rem;
 }
 
-.objective-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
-    transition: var(--transition);
-}
-
-.objective-card:hover::before {
-    left: 100%;
-}
-
-.objective-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(255, 0, 0, 0.3);
-}
-
-.objective-icon {
-    width: 80px;
-    height: 80px;
+.gt4-logo {
+    width: 100px;
+    height: 100px;
     margin: 0 auto 2rem;
     background: var(--gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.gt4-logo svg {
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.gt4-header h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+}
+
+.gt4-car {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.gt4-description {
+    background: white;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    border-left: 5px solid var(--primary-color);
+}
+
+.gt4-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.gt4-description strong {
+    color: var(--primary-color);
+}
+
+.gt4-calendar {
+    background: white;
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+
+.gt4-calendar h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.gt4-calendar h4 svg {
+    width: 30px;
+    height: 30px;
+    color: var(--primary-color);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.race-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-left: 4px solid var(--primary-color);
     transition: var(--transition);
 }
 
-.objective-card:hover .objective-icon {
-    transform: rotate(360deg) scale(1.1);
+.race-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
 }
 
-.objective-icon svg {
+.race-date {
+    font-weight: 700;
+    color: var(--primary-color);
+    min-width: 100px;
+    font-size: 0.9rem;
+}
+
+.race-track {
+    flex: 1;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.race-flag {
+    font-size: 1.5rem;
+}
+
+.gt4-budget {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.budget-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.budget-icon svg {
     width: 40px;
     height: 40px;
     color: white;
 }
 
-.objective-card h3 {
+.gt4-budget h4 {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: var(--text-dark);
 }
 
-.objective-card p {
-    color: #666;
-    line-height: 1.8;
+.budget-amount {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 1rem 0;
+}
+
+.budget-desc {
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
 /* Sponsors Section */
@@ -760,55 +854,99 @@ section {
     color: var(--text-light);
 }
 
-.sponsors-intro {
+.sponsor-benefits-title {
     text-align: center;
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 4rem;
+    margin: 3rem 0;
 }
 
-.sponsors-grid {
+.sponsor-benefits-title h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sponsor-benefits {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin: 4rem 0;
 }
 
-.sponsor-card {
+.benefit-card {
     background: rgba(255, 255, 255, 0.05);
     padding: 3rem 2rem;
     text-align: center;
     border: 2px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
-.sponsor-card:hover {
-    background: rgba(255, 255, 255, 0.1);
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+    transition: var(--transition);
+}
+
+.benefit-card:hover::before {
+    left: 100%;
+}
+
+.benefit-card:hover {
+    background: rgba(255, 255, 255, 0.08);
     border-color: var(--primary-color);
-    transform: translateY(-5px);
+    transform: translateY(-10px);
 }
 
-.sponsor-logo {
-    width: 100px;
-    height: 100px;
+.benefit-card.highlight {
+    border-color: var(--primary-color);
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
     margin: 0 auto 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: var(--transition);
 }
 
-.sponsor-logo svg {
-    width: 60px;
-    height: 60px;
-    color: rgba(255, 255, 255, 0.5);
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
-.sponsor-card h4 {
+.benefit-icon svg {
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.benefit-card h4 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.benefit-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.benefit-card strong {
+    color: var(--primary-color);
 }
 
 .become-sponsor {
@@ -1320,11 +1458,11 @@ section {
         font-size: 5rem;
     }
 
-    .objectives-grid {
+    .calendar-grid {
         grid-template-columns: 1fr;
     }
 
-    .sponsors-grid {
+    .sponsor-benefits {
         grid-template-columns: 1fr;
     }
 }
