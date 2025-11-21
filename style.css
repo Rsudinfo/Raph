@@ -1139,10 +1139,10 @@ section {
     justify-content: center;
 }
 
-.gallery-placeholder svg {
-    width: 80px;
-    height: 80px;
-    color: rgba(255, 255, 255, 0.2);
+.gallery-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .gallery-overlay {
