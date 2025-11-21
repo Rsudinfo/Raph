@@ -1139,10 +1139,39 @@ section {
     justify-content: center;
 }
 
-.gallery-placeholder img {
+.gallery-placeholder img,
+.gallery-placeholder video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.video-item .gallery-placeholder {
+    position: relative;
+}
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    transition: var(--transition);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.video-item:hover .play-icon {
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
 }
 
 .gallery-overlay {

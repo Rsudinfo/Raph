@@ -371,4 +371,35 @@ document.querySelectorAll('.about-content, .gallery-item, .contact-content').for
     fadeInObserver.observe(el);
 });
 
+// Video Gallery - Play on hover
+const videoItems = document.querySelectorAll('.video-item');
+videoItems.forEach(item => {
+    const video = item.querySelector('video');
+    const playIcon = item.querySelector('.play-icon');
+
+    if (video) {
+        item.addEventListener('mouseenter', () => {
+            video.play();
+            if (playIcon) playIcon.style.opacity = '0';
+        });
+
+        item.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+            if (playIcon) playIcon.style.opacity = '1';
+        });
+
+        // Click to play/pause
+        item.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                if (playIcon) playIcon.style.opacity = '0';
+            } else {
+                video.pause();
+                if (playIcon) playIcon.style.opacity = '1';
+            }
+        });
+    }
+});
+
 console.log('🏎️ Site Raphaël BENATOUIL - Pilote Automobile chargé avec succès!');
