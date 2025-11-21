@@ -423,6 +423,12 @@ section {
     overflow: hidden;
 }
 
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .image-placeholder::before {
     content: '';
     position: absolute;
