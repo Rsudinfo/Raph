@@ -100,12 +100,10 @@ galleryItems.forEach(item => {
     });
 });
 
-// Form Validation and Submission
+// Form Validation (mailto handles submission)
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
         // Get form values
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
@@ -113,6 +111,7 @@ if (contactForm) {
 
         // Basic validation
         if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+            e.preventDefault();
             showNotification('Veuillez remplir tous les champs', 'error');
             return;
         }
@@ -120,13 +119,13 @@ if (contactForm) {
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
+            e.preventDefault();
             showNotification('Veuillez entrer une adresse email valide', 'error');
             return;
         }
 
-        // Simulate form submission
-        showNotification('Message envoyé avec succès!', 'success');
-        contactForm.reset();
+        // Form will submit via mailto
+        showNotification('Ouverture de votre client email...', 'success');
     });
 }
 
