@@ -402,3 +402,69 @@ videoItems.forEach(item => {
 });
 
 console.log('🏎️ Site Raphaël BENATOUIL - Pilote Automobile chargé avec succès!');
+
+
+// Ligier Slider Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('.ligier-slider');
+    const slides = document.querySelectorAll('.ligier-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelectorAll('.next-btn'); // Using next-btn class, might be multiple if I copy pasted wrong, but querySelector selects first.
+    // Actually, checking index.html, there is one .prev-btn and one .next-btn within .ligier-slider-wrapper
+    
+    // Better selection
+    const nextButton = document.querySelector('.ligier-slider-wrapper .next-btn');
+    const prevButton = document.querySelector('.ligier-slider-wrapper .prev-btn');
+    
+    if (!slider || !slides.length) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    
+    // Calculate how many slides are visible at once
+    function getVisibleSlides() {
+        const containerWidth = slider.parentElement.offsetWidth;
+        const slideWidth = slides[0].offsetWidth + 20; // width + gap
+        return Math.floor(containerWidth / slideWidth);
+    }
+
+    function updateSlider() {
+        const slideWidth = slides[0].offsetWidth + 20; // 20px gap
+        slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            const visibleSlides = getVisibleSlides();
+            if (currentIndex < totalSlides - visibleSlides) { // Ensure we don't scroll past the last visible set
+                 currentIndex++;
+            } else {
+                currentIndex = 0; // Loop back to start
+            }
+            updateSlider();
+        });
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                 // Loop to end
+                 const visibleSlides = getVisibleSlides();
+                 currentIndex = totalSlides - visibleSlides > 0 ? totalSlides - visibleSlides : 0;
+            }
+            updateSlider();
+        });
+    }
+    
+    // Optional: Auto scroll
+    // setInterval(() => {
+    //     if (currentIndex < totalSlides - getVisibleSlides()) {
+    //         currentIndex++;
+    //     } else {
+    //         currentIndex = 0;
+    //     }
+    //     updateSlider();
+    // }, 5000);
+});
