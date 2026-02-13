@@ -91,11 +91,11 @@ timelineItems.forEach(item => {
 // Gallery Hover Effects
 const galleryItems = document.querySelectorAll('.gallery-item');
 galleryItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
+    item.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-10px) scale(1.02)';
     });
 
-    item.addEventListener('mouseleave', function() {
+    item.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
     });
 });
@@ -103,7 +103,7 @@ galleryItems.forEach(item => {
 // Form Validation (mailto handles submission)
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         // Get form values
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
@@ -411,16 +411,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelectorAll('.next-btn'); // Using next-btn class, might be multiple if I copy pasted wrong, but querySelector selects first.
     // Actually, checking index.html, there is one .prev-btn and one .next-btn within .ligier-slider-wrapper
-    
+
     // Better selection
     const nextButton = document.querySelector('.ligier-slider-wrapper .next-btn');
     const prevButton = document.querySelector('.ligier-slider-wrapper .prev-btn');
-    
+
     if (!slider || !slides.length) return;
 
     let currentIndex = 0;
     const totalSlides = slides.length;
-    
+
     // Calculate how many slides are visible at once
     function getVisibleSlides() {
         const containerWidth = slider.parentElement.offsetWidth;
@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.addEventListener('click', () => {
             const visibleSlides = getVisibleSlides();
             if (currentIndex < totalSlides - visibleSlides) { // Ensure we don't scroll past the last visible set
-                 currentIndex++;
+                currentIndex++;
             } else {
                 currentIndex = 0; // Loop back to start
             }
@@ -450,14 +450,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentIndex > 0) {
                 currentIndex--;
             } else {
-                 // Loop to end
-                 const visibleSlides = getVisibleSlides();
-                 currentIndex = totalSlides - visibleSlides > 0 ? totalSlides - visibleSlides : 0;
+                // Loop to end
+                const visibleSlides = getVisibleSlides();
+                currentIndex = totalSlides - visibleSlides > 0 ? totalSlides - visibleSlides : 0;
             }
             updateSlider();
         });
     }
-    
+
     // Optional: Auto scroll
     // setInterval(() => {
     //     if (currentIndex < totalSlides - getVisibleSlides()) {
@@ -467,4 +467,78 @@ document.addEventListener('DOMContentLoaded', () => {
     //     }
     //     updateSlider();
     // }, 5000);
+
+    // Lightbox Functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+
+    let currentLightboxIndex = 0;
+    const galleryImages = [];
+
+    // Collect all Ligier images
+    slides.forEach((slide, index) => {
+        const img = slide.querySelector('img');
+        if (img) {
+            galleryImages.push(img.src);
+            slide.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        }
+    });
+
+    function openLightbox(index) {
+        currentLightboxIndex = index;
+        lightboxImg.src = galleryImages[currentLightboxIndex];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Enable scrolling
+    }
+
+    function showNextImage(e) {
+        if (e) e.stopPropagation();
+        currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentLightboxIndex];
+    }
+
+    function showPrevImage(e) {
+        if (e) e.stopPropagation();
+        currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentLightboxIndex];
+    }
+
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', showNextImage);
+    }
+
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', showPrevImage);
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') showNextImage();
+        if (e.key === 'ArrowLeft') showPrevImage();
+    });
 });
